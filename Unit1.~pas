@@ -1,0 +1,53 @@
+unit Unit1;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls;
+
+type
+  TForm1 = class(TForm)
+    Button1: TButton;
+    Button3: TButton;
+    Button4: TButton;
+    ListBox1: TListBox;
+    Button2: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+      subor:textfile;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+  pole:array[1..10] of integer;
+
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+ var i:integer;
+begin
+randomize;
+pole[1]:=random(150);
+for i:= 2 to 10 do
+pole[i]:=pole[i-1] + random(150);
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+  var i:integer;
+begin
+assignfile(subor,'pole.txt');
+rewrite(subor);
+for i:= 1 to 10 do
+writeln(subor,inttostr(pole[i]));
+closefile(subor);
+end;
+
+end.
